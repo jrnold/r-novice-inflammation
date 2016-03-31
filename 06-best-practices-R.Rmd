@@ -15,41 +15,41 @@ source("tools/chunk-options.R")
 
 1. Start your code with a description of what it is:
 
-```{r}
-#This is code to replicate the analyses and figures from my 2014 Science paper.
-#Code developed by Sarah Supp, Tracy Teal, and Jon Borelli
-```
+    ```{r}
+    #This is code to replicate the analyses and figures from my 2014 Science paper.
+    #Code developed by Sarah Supp, Tracy Teal, and Jon Borelli
+    ```
 
 2. Run all of your import statements (`library`):
 
-```{r, eval=FALSE}
-library(ggplot2)
-library(reshape)
-library(vegan)
-```
+    ```{r, eval=FALSE}
+    library(ggplot2)
+    library(reshape)
+    library(vegan)
+    ```
 
 3. Set your working directory before `source()`ing a script, or start `R` inside your project folder:
 
-One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
+    One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
 
-* `setwd()` will throw an error if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it. This becomes a problem when sharing scripts between users who have organized their directories differently.
-* If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems. If you must use `setwd()`, it is best to put it at the top of the script to avoid this problem.
+    * `setwd()` will throw an error if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it. This becomes a problem when sharing scripts between users who have organized their directories differently.
+    * If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems. If you must use `setwd()`, it is best to put it at the top of the script to avoid this problem.
 
-The following error message indicates that R has failed to set the working directory you specified:
+    The following error message indicates that R has failed to set the working directory you specified:
 
-```
-Error in setwd("~/path/to/working/directory") : cannot change working directory
-```
+    ```
+    Error in setwd("~/path/to/working/directory") : cannot change working directory
+    ```
 
-Consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below).
+    Consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below).
 
 4. Use `#` or `#-` to set off sections of your code so you can easily scroll through it and find things.
 
 5. If you have only one or a few functions, put them at the top of your code, so they are among the first things run. If you have written many functions, put them all in their own .R file, and `source` them. Source will define all of these functions so that you can use them as you need them. For the reasons listed above, try to avoid using `setwd()` (or other functions that have side-effects in the user's workspace) in scripts you `source`.
 
-```{r, eval=FALSE}
-source("my_genius_fxns.R")
-```
+    ```{r, eval=FALSE}
+    source("my_genius_fxns.R")
+    ```
 
 6. Use consistent style within your code.
 
@@ -59,26 +59,42 @@ source("my_genius_fxns.R")
 
 9. Manage all of your source files for a project in the same directory. Then use relative paths as necessary. For example, use
 
-```{r, eval=FALSE}
-dat <- read.csv(file = "files/dataset-2013-01.csv", header = TRUE)
-```
+    ```{r, eval=FALSE}
+    dat <- read.csv(file = "files/dataset-2013-01.csv", header = TRUE)
+    ```
 
-rather than:
+    rather than:
 
-```{r, eval=FALSE}
-dat <- read.csv(file = "/Users/Karthik/Documents/sannic-project/files/dataset-2013-01.csv", header = TRUE)
-```
+    ```{r, eval=FALSE}
+    dat <- read.csv(file = "/Users/Karthik/Documents/sannic-project/files/dataset-2013-01.csv", header = TRUE)
+    ```
 
 10. R can run into memory issues. It is a common problem to run out of memory after running R scripts for a long time. In order to inspect your R session objects, you can list the objects, search current packages and remove objects that are currently not in use. A good practice when running long lines of computationally intensive sequential code is to remove temporary objects after they have served their purpose. Sometimes R will not clean up unused memory for a while after you delete objects. You can force R to tidy up its memory by using `gc()`.
 
-~~~{.r}
-interim_object <- data.frame(rep(1:100,10),rep(101:200,10),rep(201:300,10)) # Sample dataset of 1000 rows
-object.size(interim_object) # Reports the memory size allocated to the object
-rm(interim_object) # Removes only the particular object
-gc() # Force R to release memory it is no longer using
-ls()  # Lists all the objects in your current workspace
-rm(list = ls()) # If you want to delete all the objects in the workspace and start with a new slate
-~~~
+    Sample a dataset of 1000 rows
+    ```{r, eval = FALSE}
+    interim_object <- data.frame(rep(1:100,10),rep(101:200,10),rep(201:300,10))
+    ```
+    Report the memory size allocated to the object,
+    ```{r, eval = FALSE}
+    object.size(interim_object)
+    ```
+    Remove only a particular object,
+    ```{r, eval = FALSE}
+    rm(interim_object)
+    ```
+    Force R to release memory it is no longer using,
+    ```{r, eval = FALSE}
+    gc()
+    ```
+    Lists all the objects in your current workspace,
+    ```{r, eval = FALSE}
+    ls()
+    ```  
+    If you want to delete all the objects in the workspace and start with a new slate,
+    ```{r, eval = FALSE}
+    rm(list = ls())
+    ```
 
 11. Don't save a session history (the default option in R, when it asks if you want an `RData` file). Instead, start in a clean environment so that older objects don't contaminate your current environment. This can lead to unexpected results, especially if the code were to be run on someone else's machine.
 
