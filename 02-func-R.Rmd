@@ -35,7 +35,7 @@ fahr_to_kelvin <- function(temp) {
 ```
 
 We define `fahr_to_kelvin` by assigning it to the output of `function`.
-The list of argument names are containted within parentheses.
+The list of argument names are contained within parentheses.
 Next, the [body](reference.html#function-body) of the function--the statements that are executed when it runs--is contained within curly braces (`{}`).
 The statements in the body are indented by two spaces, which makes the code easier to read but does not affect how the code operates.
 
@@ -286,7 +286,7 @@ We can even go further and check that the standard deviation hasn't changed:
 ```{r}
 # original standard deviation
 sd(dat[, 4])
-# centerted standard deviation
+# centered standard deviation
 sd(centered)
 ```
 
@@ -522,7 +522,7 @@ max(answer)
 >
 > We now have a function called analyze to visualize a single data set.
 > We could use it to explore all 12 of our current data sets like this:
-> 
+>
 > ```{r, eval=FALSE}
 > analyze("data/inflammation-01.csv")
 > analyze("data/inflammation-02.csv")
